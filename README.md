@@ -1,2 +1,2 @@
-# File-Reader-Writer-App-Test
-Simple File Reader/Writer App For Android
+# File-Manager
+Simple File Manager App For Android
