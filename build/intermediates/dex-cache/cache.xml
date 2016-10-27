@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="/Users/Stas/Documents/Android_Projects/IOTest/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="D:\Development\Android Projects\File-Reader-Writer-App-Test\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="ca6f04b2aea7f40c0d46fba6085a4b33baf7a31a">
-        <dex dex="/Users/Stas/Documents/Android_Projects/IOTest/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_335114854bcb5cae592f5e309422912b115d1fd4/classes.dex" />
+        sha1="8562c17aebf763a8900998c46aef8901cb86c698">
+        <dex dex="D:\Development\Android Projects\File-Reader-Writer-App-Test\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_cec86de4c613a614439eeb14e3652b0e94fcd070\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/Stas/Documents/Android_Projects/IOTest/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jar="D:\Development\Android Projects\File-Reader-Writer-App-Test\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="5c74d515dd33b5a3047845d104a466d95688a69c">
-        <dex dex="/Users/Stas/Documents/Android_Projects/IOTest/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_d02f5c22a06fe7c683ca046486f5476e5375f7bd/classes.dex" />
+        sha1="b31fe0e42f935516aed8824f08e6c9cf57bbda61">
+        <dex dex="D:\Development\Android Projects\File-Reader-Writer-App-Test\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_f0377865dee57f013a876ba237a157b0a29538db\classes.dex" />
     </item>
 
 </items>
