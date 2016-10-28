@@ -3,13 +3,20 @@ package com.example.stas.iotest;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentProvider;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ShareCompat;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
@@ -24,7 +31,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     Boolean result = false;
     String[] files;
@@ -37,12 +44,13 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        result = AskForPermissions();
+        if (result.equals(false))
+        {
+            return;
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        while (!result)
-        {
-            result = AskForPermissions();
-        }
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))
         {
             current_path = Environment.getExternalStorageDirectory().getPath();
@@ -125,8 +133,8 @@ public class MainActivity extends Activity {
     {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch(item.getItemId()) {
-            case R.id.add:
-
+            case R.id.open:
+                openFileDialog(info.position);
                 return true;
             case R.id.edit:
 
@@ -135,7 +143,7 @@ public class MainActivity extends Activity {
                 renameFileDialog(list.getItemAtPosition(info.position).toString(), info.position);
                 return true;
             case R.id.delete:
-
+                deleteFileDialog(info.position);
                 return true;
             default:
                 return super.onContextItemSelected(item);
@@ -240,6 +248,45 @@ public class MainActivity extends Activity {
         renameFileDialog.show();
     }
 
+    private void deleteFileDialog(final int position)
+    {
+        AlertDialog.Builder deleteFileDialog = new AlertDialog.Builder(this);
+        deleteFileDialog.setTitle("Delete");
+        deleteFileDialog.setPositiveButton("OK", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                File file = new File(current_path, files[position]);
+                file.delete();
+                updateList();
+            }
+        });
+        deleteFileDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+
+            }
+        });
+        deleteFileDialog.show();
+    }
+
+    private void openFileDialog(final int position)
+    {
+        File file = new File(current_path, files[position]);
+        Uri uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".fileprovider", file);
+        String type = getContentResolver().getType(uri);
+        Intent intent = ShareCompat.IntentBuilder.from(this)
+                .setType(type)
+                .setStream(uri)
+                .setChooserTitle("Choose application")
+                .createChooserIntent()
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        this.startActivity(intent);
+    }
+
     private boolean AskForPermissions()
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
@@ -251,8 +298,10 @@ public class MainActivity extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE)
+        {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
                 Toast.makeText(this, "Permissions granted", Toast.LENGTH_SHORT).show();
                 AskForPermissions();
             }
