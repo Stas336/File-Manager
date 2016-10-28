@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         list = (ListView) findViewById(R.id.List);
         registerForContextMenu(list);
         updateList();
+        Toast.makeText(this, "You can change current window by touching MENU button", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Current active window is " + active_window, Toast.LENGTH_SHORT).show();
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
