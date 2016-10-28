@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     String[] files;
     File directory;
-    String current_path;
+    String current_path, current_path_first_window, current_path_second_window;
+    int active_window;
     ListView list;
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 100;
     private static int KEYCODE_BACK_PRESSED_QTY = 0;
@@ -51,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     {
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             current_path = Environment.getExternalStorageDirectory().getPath();
+            active_window = 1;
+            current_path_first_window = current_path;
+            current_path_second_window = current_path;
         } else {
             Toast.makeText(this, "Storage is not mounted. Exiting...", Toast.LENGTH_SHORT).show();
             finish();
@@ -106,6 +110,54 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
                 return true;
+            case R.id.copy:
+                File file_from_active_window;
+                File file_from_other_window;
+                try
+                {
+                    if (active_window == 1)
+                    {
+                        file_from_active_window = new File(current_path, files[info.position]);
+                        file_from_other_window = new File(current_path_second_window, files[info.position]);
+                    }
+                    else
+                    {
+                        file_from_active_window = new File(current_path, files[info.position]);
+                        file_from_other_window = new File(current_path_first_window, files[info.position]);
+                    }
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader(file_from_active_window));
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String file_content;
+                    while ((file_content = bufferedReader.readLine()) != null)
+                    {
+                        stringBuilder.append(file_content);
+                    }
+                    bufferedReader.close();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file_from_other_window));
+                    bufferedWriter.write(stringBuilder.toString());
+                    bufferedWriter.close();
+                }catch (Exception ex)
+                {
+                    Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                Toast.makeText(this, "Successfully created copy of " + files[info.position], Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.move:
+                if (active_window == 1)
+                {
+                    file_from_active_window = new File(current_path, files[info.position]);
+                    file_from_other_window = new File(current_path_second_window, files[info.position]);
+                }
+                else
+                {
+                    file_from_active_window = new File(current_path, files[info.position]);
+                    file_from_other_window = new File(current_path_first_window, files[info.position]);
+                }
+                file_from_active_window.renameTo(file_from_other_window);
+                Toast.makeText(this, "Successfully moved " + files[info.position], Toast.LENGTH_SHORT).show();
+                updateList();
+                return true;
             case R.id.rename:
                 renameFileDialog(list.getItemAtPosition(info.position).toString(), info.position);
                 return true;
@@ -141,19 +193,29 @@ public class MainActivity extends AppCompatActivity {
                 current_path = current_path.substring(0, current_path.lastIndexOf("/"));
                 updateList();
             }
-        } else if (keyCode == KeyEvent.KEYCODE_MENU) //TODO
+        } else if (keyCode == KeyEvent.KEYCODE_MENU)
         {
-            Toast.makeText(this, "NOT SUPPORTED AT THE MOMENT", Toast.LENGTH_SHORT).show();
+            switchWindows();
         }
         return true;
     }
 
-    private void showAllExternalStorages() //TODO
+    private void switchWindows()
     {
-        current_path = current_path.substring(0, current_path.lastIndexOf("/"));
-        directory = new File(current_path);
-        files = directory.list();
-
+        if (active_window != 1)
+        {
+            current_path_second_window = current_path;
+            current_path = current_path_first_window;
+            active_window = 1;
+        }
+        else
+        {
+            current_path_first_window = current_path;
+            current_path = current_path_second_window;
+            active_window = 2;
+        }
+        Toast.makeText(this, "Current active window is " + active_window, Toast.LENGTH_SHORT).show();
+        updateList();
     }
 
     private void editFileDialog(final String content, final File original_file)
