@@ -3,24 +3,6 @@
 
     <item
         is-multidex="true"
-        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.0/jars/libs/internal_impl-25.0.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="ee5faf4dee5b6a4364bf51587871047dde7c703a">
-        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.0_4d9f391e053abc3c769a7e739d64254a468d2b7c/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.0/jars/libs/internal_impl-25.0.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
-        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.0_4a449f869235665c71f1b779ce9a4efe95c7cebe/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.0/jars/libs/internal_impl-25.0.0.jar"
         jumboMode="true"
         optimize="true"
@@ -30,39 +12,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="53a420cd4f49274db6bd43475f8006ba67ef6bbd">
-        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.0.0_0328f3f6565454f2f2228bfc9f830a1cd584b312/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="75b1f366ff0bbc78f8b1f7cf0dc82e7c53afef6a">
-        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.0.0_570daf4e4c402993d08ff747fcb9b550d290ca53/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.0/jars/libs/internal_impl-25.0.0.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="665d21a8a069c96b4d9e8b434f5096d865b4e261">
         <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.0_cac88d5dc96b2c61939b45195a8b9bdadcc38297/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="5c38e74a25517117c2e7ad8af90c76d9e3abda3a">
-        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ec0f9743b8092dc3db3c6e400993f3e79c78d543/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -84,21 +39,75 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.0.0_a6c56badab6dcd365c54fdc5590f88e845a3bc3c/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="8bc45ce1f63d1a391fd38b32a201be5a42f9c95d">
         <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.0.0_14f6d7ba373694f8f944b90f311942aa04b66f68/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
+        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.0.0_ad594d6be42d0d041429b6f62f747bb947991c8b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ee5faf4dee5b6a4364bf51587871047dde7c703a">
+        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.0_4d9f391e053abc3c769a7e739d64254a468d2b7c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.0_4a449f869235665c71f1b779ce9a4efe95c7cebe/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="53a420cd4f49274db6bd43475f8006ba67ef6bbd">
+        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.0.0_0328f3f6565454f2f2228bfc9f830a1cd584b312/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="75b1f366ff0bbc78f8b1f7cf0dc82e7c53afef6a">
+        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.0.0_570daf4e4c402993d08ff747fcb9b550d290ca53/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2aa62c27ee4121607128c397c86b4dd0c9e69e63">
+        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ec0f9743b8092dc3db3c6e400993f3e79c78d543/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.0.0_a6c56badab6dcd365c54fdc5590f88e845a3bc3c/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -115,17 +124,8 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="f8aa54920208e7044438b640ff54226ca29091f6">
+        sha1="e3398de58e52db52f4122db43f3b0000bbe6ab58">
         <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_ea8298d58c35f0aa5c8b7aa9baaa27a13a37f76e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
-        <dex dex="/Users/Stas/Documents/Android_Projects/File-Manager/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.0.0_ad594d6be42d0d041429b6f62f747bb947991c8b/classes.dex" />
     </item>
     <item
         is-multidex="true"
