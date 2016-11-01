@@ -11,9 +11,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Vibrator;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.MenuInflater;
@@ -23,13 +29,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
     String current_path, current_path_first_window, current_path_second_window;
     int active_window;
     ListView list;
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    static List<Snackbar> snackBarList;
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 100;
     private static int KEYCODE_BACK_PRESSED_QTY = 0;
 
@@ -50,20 +61,51 @@ public class MainActivity extends AppCompatActivity {
 
     public void ActivityAfterGrantingPermissions()
     {
+        snackBarList = new ArrayList<>();
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             current_path = Environment.getExternalStorageDirectory().getPath();
             active_window = 1;
             current_path_first_window = current_path;
             current_path_second_window = current_path;
         } else {
-            Toast.makeText(this, "Storage is not mounted. Exiting...", Toast.LENGTH_SHORT).show();
+            showSnackBar(findViewById(android.R.id.content), "Storage is not mounted. Exiting...", false);
             finish();
         }
         list = (ListView) findViewById(R.id.List);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        drawerLayout = (DrawerLayout) findViewById(R.id.Drawer);
+        navigationView = (NavigationView) findViewById(R.id.Navigation);
         registerForContextMenu(list);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                item.setChecked(true);
+                switch (item.getItemId()) {
+                    case R.id.navigation_item_1:
+                        showSnackBar(findViewById(android.R.id.content), "You have selected item 1", false);
+                        //mCurrentSelectedPosition = 0;
+                        return true;
+                    case R.id.navigation_item_2:
+                        showSnackBar(findViewById(android.R.id.content), "You have selected item 2", false);
+                        //mCurrentSelectedPosition = 1;
+                        return true;
+                    default:
+                        return true;
+                }
+            }
+        });
         updateList();
-        Toast.makeText(this, "You can change current window by touching MENU button", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Current active window is " + active_window, Toast.LENGTH_SHORT).show();
+        showSnackBar(findViewById(android.R.id.content), "You can change current window by touching MENU button", true);
+        showSnackBar(findViewById(android.R.id.content), "Current active window is " + active_window, true);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -76,6 +118,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public static void showSnackBar(View v, String s, boolean queued)
+    {
+        Snackbar snackbar = Snackbar.make(v, s, Snackbar.LENGTH_SHORT);
+        if (queued)
+        {
+            snackbar.setCallback(new Snackbar.Callback()
+            {
+                @Override
+                public void onDismissed(Snackbar currentSnackbar, int event)
+                {
+                    super.onDismissed(currentSnackbar, event);
+                    snackBarList.remove(currentSnackbar);
+                    if (snackBarList.size() > 0)
+                    {
+                        snackBarList.get(0).show();
+                    }
+                }
+            });
+            snackBarList.add(snackbar);
+            if (snackBarList.size() == 1)
+            {
+                snackBarList.get(0).show();
+            }
+        }
+        else
+        {
+            snackbar.show();
+        }
+    }
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -84,6 +156,12 @@ public class MainActivity extends AppCompatActivity {
             inflater.inflate(R.menu.context_menu, menu);
         }
     }
+
+    /*@Override //отображается меню справа
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.drawer_menu, menu);
+        return true;
+    }*/
 
     @Override
     public boolean onContextItemSelected(MenuItem item)
@@ -108,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                     editFileDialog(stringBuilder.toString(), file);
                 }catch (Exception ex)
                 {
-                    Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    showSnackBar(findViewById(android.R.id.content), ex.getMessage(), false);
                     finish();
                 }
                 return true;
@@ -140,10 +218,10 @@ public class MainActivity extends AppCompatActivity {
                     bufferedWriter.close();
                 }catch (Exception ex)
                 {
-                    Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    showSnackBar(findViewById(android.R.id.content), ex.getMessage(), false);
                     finish();
                 }
-                Toast.makeText(this, "Successfully created copy of " + files[info.position], Toast.LENGTH_SHORT).show();
+                showSnackBar(findViewById(android.R.id.content), "Successfully created copy of " + files[info.position], false);
                 return true;
             case R.id.move:
                 if (active_window == 1)
@@ -157,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                     file_from_other_window = new File(current_path_first_window, files[info.position]);
                 }
                 file_from_active_window.renameTo(file_from_other_window);
-                Toast.makeText(this, "Successfully moved " + files[info.position], Toast.LENGTH_SHORT).show();
+                showSnackBar(findViewById(android.R.id.content), "Successfully moved " + files[info.position], false);
                 updateList();
                 return true;
             case R.id.rename:
@@ -185,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
             if (KEYCODE_BACK_PRESSED_QTY == 2) {
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 v.vibrate(50);
-                Toast.makeText(this, "Press 1 more time to exit...", Toast.LENGTH_SHORT).show();
+                showSnackBar(findViewById(android.R.id.content), "Press 1 more time to exit...", false);
             } else if (KEYCODE_BACK_PRESSED_QTY == 3) {
                 KEYCODE_BACK_PRESSED_QTY = 0;
                 openQuitDialog();
@@ -216,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
             current_path = current_path_second_window;
             active_window = 2;
         }
-        Toast.makeText(this, "Current active window is " + active_window, Toast.LENGTH_SHORT).show();
+        showSnackBar(findViewById(android.R.id.content), "Current active window is " + active_window, false);
         updateList();
     }
 
@@ -237,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
                     bufferedWriter.close();
                 }catch (Exception ex)
                 {
-                    Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    showSnackBar(findViewById(android.R.id.content), ex.getMessage(), false);
                     finish();
                 }
             }
@@ -331,7 +409,7 @@ public class MainActivity extends AppCompatActivity {
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }catch (Exception ex)
         {
-            Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+            showSnackBar(findViewById(android.R.id.content), ex.getMessage(), false);
             finish();
         }
         this.startActivity(intent);
@@ -362,7 +440,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(this, "Permission has been denied to read external storage", Toast.LENGTH_SHORT).show();
+                    showSnackBar(findViewById(android.R.id.content), "Permission has been denied to read external storage", false);
                 }
             }
         }
